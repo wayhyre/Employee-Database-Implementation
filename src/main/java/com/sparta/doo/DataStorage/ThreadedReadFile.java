@@ -29,7 +29,7 @@ public class ThreadedReadFile {
                 // puts separated dates into positions
                 Employee employee = new Employee(Integer.parseInt(data[0]), data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]);
                 dataStore.put(Integer.valueOf(employee.getEmpID()), employee);
-                if (count == 1500) {
+                if (count == 500) {
                     Collection<Employee> employees = new HashSet<>(dataStore.values());
                     PersistEmployees(employees);
                     dataStore.clear();
@@ -50,7 +50,7 @@ public class ThreadedReadFile {
             EmployeeDAO employeeDAO = new EmployeeDAO();
             employeeDAO.plugEmployees(employeeCollection);
             long end = System.nanoTime();
-            System.out.println((end - start) / 1_000_000_000);
+            System.out.println((end - start) / 1_000_000_000 + " seconds");
         };
         Thread thread = new Thread(runnable);
         thread.start();
